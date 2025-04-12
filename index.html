@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Registro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Regístrate</h2>
+  <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
+    <label for="name">Nombre:</label>
+    <input type="text" name="name" id="name" required placeholder="Tu nombre">
+    
+    <button type="submit">Enviar</button>
+
+    <!-- Configuración de FormSubmit -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://gracias.com">
+  </form>
+</body>
+</html>
