@@ -1,41 +1,77 @@
-<!DOCTYPE html>
+html_with_password = """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario de Registro</title>
+  <title>Acceso Protegido</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 40px;
       background-color: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-    form {
+    #login, #formulario {
       background: white;
       padding: 20px;
-      max-width: 400px;
-      margin: auto;
       border-radius: 8px;
+      max-width: 400px;
+      width: 100%;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     input, button {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
-      box-sizing: border-box;
+    }
+    #formulario {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h2 style="text-align: center;">Regístrate</h2>
-  <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" id="name" required placeholder="Tu nombre">
-    
-    <button type="submit">Enviar</button>
 
-    <!-- Configuración de FormSubmit -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://gracias.com">
-  </form>
+  <!-- Pantalla de contraseña -->
+  <div id="login">
+    <h2>Ingresa la contraseña</h2>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button onclick="verificarContrasena()">Entrar</button>
+    <p id="mensaje" style="color: red; display: none;">Contraseña incorrecta</p>
+  </div>
+
+  <!-- Formulario oculto -->
+  <div id="formulario">
+    <h2>Formulario de Registro</h2>
+    <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
+      <label for="name">Nombre:</label>
+      <input type="text" name="name" id="name" required placeholder="Tu nombre">
+      <button type="submit">Enviar</button>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://gracias.com">
+    </form>
+  </div>
+
+  <script>
+    function verificarContrasena() {
+      const pass = document.getElementById('password').value;
+      if (pass === 'Pequitas') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('formulario').style.display = 'block';
+      } else {
+        document.getElementById('mensaje').style.display = 'block';
+      }
+    }
+  </script>
+
 </body>
 </html>
+"""
+
+#Guardar archivo
+file_path = "/mnt/data/index.html"
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html_with_password)
+
+file_path
