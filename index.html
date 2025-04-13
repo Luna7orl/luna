@@ -12,8 +12,10 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      margin: 0;
+      text-align: center;
     }
-    #login, #formulario, #thanks {
+    #login, #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
       background: white;
       padding: 20px;
       border-radius: 8px;
@@ -21,12 +23,40 @@
       width: 100%;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+    #imagen-dedo img {
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
     input, button {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
-    #formulario, #thanks {
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .boton-azul {
+      background-color: #007BFF;
+    }
+    .boton-verde {
+      background-color: #28a745;
+    }
+    .botones-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
       display: none;
     }
   </style>
@@ -48,8 +78,6 @@
       <label for="name">Nombre:</label>
       <input type="text" name="name" id="name" required placeholder="Tu nombre">
       <button type="button" onclick="mostrarGracias()">Enviar</button>
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://gracias.com">
     </form>
   </div>
 
@@ -57,7 +85,29 @@
   <div id="thanks">
     <h2>¡Gracias por estar aquí!</h2>
     <p id="thankMessage"></p>
-    <button onclick="continuar()">Continuar</button>
+    <button onclick="mostrarMensajeSecreto()">Continuar</button>
+  </div>
+
+  <!-- Mensaje secreto -->
+  <div id="mensaje-secreto">
+    <p>Tengo que decirte algo, mira...</p>
+    <button onclick="mostrarImagenDedo()">Continuar</button>
+  </div>
+
+  <!-- Imagen del dedo -->
+  <div id="imagen-dedo">
+    <p>Mi dedo</p>
+    <img src="https://i.ibb.co/Y7GZjN2x/image.jpg" alt="Dedo">
+    <div class="botones-container">
+      <button onclick="finalizar()">Finalizar</button>
+      <button class="boton-azul" onclick="mostrarSiguienteMensaje()">No es cierto, es lo siguiente</button>
+    </div>
+  </div>
+
+  <!-- Mensaje final -->
+  <div id="siguiente-mensaje">
+    <p id="texto-final">¡Este es el mensaje especial que querías compartir! 💖</p>
+    <button class="boton-verde" onclick="cerrarTodo()">Cerrar</button>
   </div>
 
   <script>
@@ -76,15 +126,35 @@
       document.getElementById('formulario').style.display = 'none';
       document.getElementById('thanks').style.display = 'block';
       document.getElementById('thankMessage').innerHTML = 'Gracias, ' + name + ', por estar aquí.';
-
-      // Mostrar el mensaje de gracias con un botón para continuar
     }
 
-    function continuar() {
-      // Aquí puedes hacer que se abra el texto que quieras o redirigir a otra página
-      alert('¡Gracias por tu registro!');
+    function mostrarMensajeSecreto() {
+      document.getElementById("thanks").style.display = "none";
+      document.getElementById("mensaje-secreto").style.display = "block";
+    }
+
+    function mostrarImagenDedo() {
+      document.getElementById("mensaje-secreto").style.display = "none";
+      document.getElementById("imagen-dedo").style.display = "block";
+    }
+
+    function mostrarSiguienteMensaje() {
+      document.getElementById("imagen-dedo").style.display = "none";
+      document.getElementById("siguiente-mensaje").style.display = "block";
+      // Personaliza el mensaje final:
+      document.getElementById("texto-final").innerText = "¡Tengo que decirte que... (tu mensaje aquí)!";
+    }
+
+    function finalizar() {
+      alert("¡Hasta pronto! ❤");
+      // Opción alternativa: window.location.href = "https://...";
+    }
+
+    function cerrarTodo() {
+      // Recarga la página para reiniciar el flujo:
+      location.reload();
+      // Opción alternativa: window.location.href = "https://...";
     }
   </script>
-
 </body>
 </html>
