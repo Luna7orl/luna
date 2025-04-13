@@ -9,6 +9,7 @@
       --azul-pastel: #B0E0E6;
       --amarillo-bajo: #FFD700;
       --amarillo-hover: #FFC000;
+      --error: #ff6b6b;
     }
     
     body {
@@ -38,6 +39,12 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
     }
     
     h1, h2, h3 {
@@ -106,20 +113,13 @@
     }
     
     #mensaje-error {
-      color: #d9534f;
+      color: var(--error);
       display: none;
       margin-top: 10px;
       font-weight: bold;
-      animation: shake 0.5s;
     }
     
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-    
-    /* Ocultar todas las secciones excepto login inicialmente */
+    /* Ocultar secciones inicialmente */
     #formulario, #thanks, #mensaje-secreto, #imagen-dedo, 
     #disculpa-inicial, #disculpa-parte1, #disculpa-parte2, #final {
       display: none;
@@ -132,149 +132,180 @@
   <div id="login" class="container">
     <h2>Ingresa la contraseña</h2>
     <input type="password" id="password" placeholder="Contraseña" required>
-    <button id="btn-entrar">Entrar</button>
+    <button onclick="verificarContrasena()">Entrar</button>
     <p id="mensaje-error">Contraseña incorrecta. Intenta nuevamente.</p>
   </div>
 
   <!-- Formulario -->
   <div id="formulario" class="container">
     <h2>Formulario de Registro</h2>
-    <form id="myForm">
-      <label for="name">Nombre:</label>
-      <input type="text" name="name" id="name" required placeholder="Tu nombre" minlength="2">
-      <button type="button" id="btn-enviar">Enviar</button>
-      
-      <!-- Configuración para FormSubmit -->
+    <form id="myForm" action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="Alguien ha entrado a tu página especial">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" value="https://luna7orl.github.io/luna/thanks.html">
       <input type="text" name="_honey" style="display:none">
       <input type="hidden" name="_captcha" value="false">
+      
+      <label for="name">Nombre:</label>
+      <input type="text" name="name" id="name" required placeholder="Tu nombre" minlength="2">
+      <button type="button" onclick="enviarFormulario()">Enviar</button>
     </form>
   </div>
 
-  <!-- Resto de las secciones (manteniendo el mismo contenido) -->
-  <!-- ... -->
+  <!-- Mensaje de agradecimiento -->
+  <div id="thanks" class="container">
+    <h2>¡Gracias por estar aquí!</h2>
+    <p id="thankMessage"></p>
+    <button onclick="mostrarMensajeSecreto()">Continuar</button>
+  </div>
+
+  <!-- Mensaje secreto -->
+  <div id="mensaje-secreto" class="container">
+    <p>Tengo que decirte algo, mira...</p>
+    <button onclick="mostrarImagenDedo()">Continuar</button>
+  </div>
+
+  <!-- Imagen del dedo -->
+  <div id="imagen-dedo" class="container">
+    <p>Mi dedo</p>
+    <img src="https://i.ibb.co/Y7GZjN2x/image.jpg" alt="Dedo">
+    <button onclick="mostrarDisculpaInicial()">No es cierto, es lo siguiente</button>
+  </div>
+
+  <!-- Disculpa inicial -->
+  <div id="disculpa-inicial" class="container">
+    <div class="texto-mensaje">
+      <p>Hola, soy yo de nuevo, no sé si abras esto y si sí pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página nunca había hecho una por ciento, entonces tiene detalles que perfeccionar, pero espero que te haya gustado, es sólo para ti.</p>
+      <p>Y pues es para decirte, que eres una persona muy amable, muy linda me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
+      <p>Pero no venía a decirte lo mucho que vales y espectacular que eres pero no me costaba nada recordártelo, lo que te quería decir es que te debo una disculpa.</p>
+    </div>
+    <button onclick="mostrarDisculpaParte1()">Continuar</button>
+  </div>
+
+  <!-- Disculpa parte 1 -->
+  <div id="disculpa-parte1" class="container">
+    <div class="texto-mensaje">
+      <p>Verdad que si quieres una disculpa, chimosilla.</p>
+    </div>
+    <button onclick="mostrarDisculpaParte2()">Seguir con la disculpa</button>
+  </div>
+
+  <!-- Disculpa parte 2 -->
+  <div id="disculpa-parte2" class="container">
+    <div class="texto-mensaje">
+      <p>Te debo más que una disculpa por hacerte sentir "mal y tal vez confundida" y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobradía, si no de valentía y no te voy a mentir, aunque nos hemos conocido muy poco hasta el momento para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir, conocerte es de las mejores cosas que han pasado hasta el momento, me interesa como te sientes desde que despiertas hasta que te vas a descansar y aunque tal vez no lo demuestro con mis expresiones y acciones, pero estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa y me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.</p>
+      <p>Deseo de que esta historia se siga escribiendo, quiero saber que puede ser de nosotros que nos prepara el mañana, porque si algo he aprendido de historias contadas y experiencias es que cuando alguien importa de verdad, uno no se rinde tan fácil.</p>
+    </div>
+    <div class="botones-container">
+      <button onclick="opcionSeleccionada('seguir')">Seguir contando historia</button>
+      <button onclick="opcionSeleccionada('nada')">Ya nada dota</button>
+    </div>
+  </div>
+
+  <!-- Final -->
+  <div id="final" class="container">
+    <h2 id="mensaje-final"></h2>
+    <button onclick="location.reload()">Volver al inicio</button>
+  </div>
 
   <script>
-    // Variables globales
-    const nombreUsuario = {
-      value: '',
-      set: function(nombre) {
-        this.value = nombre.trim();
-        localStorage.setItem('nombreUsuario', this.value);
-      },
-      get: function() {
-        return this.value || localStorage.getItem('nombreUsuario') || 'Anónimo';
-      }
-    };
-    
-    // Elementos del DOM
-    const elementos = {
-      login: document.getElementById('login'),
-      formulario: document.getElementById('formulario'),
-      thanks: document.getElementById('thanks'),
-      password: document.getElementById('password'),
-      name: document.getElementById('name'),
-      btnEntrar: document.getElementById('btn-entrar'),
-      btnEnviar: document.getElementById('btn-enviar'),
-      errorMsg: document.getElementById('mensaje-error'),
-      thankMessage: document.getElementById('thankMessage')
-    };
-    
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', function() {
-      // Event listeners mejorados
-      elementos.btnEntrar.addEventListener('click', verificarContrasena);
-      elementos.btnEnviar.addEventListener('click', enviarFormulario);
-      elementos.password.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') verificarContrasena();
-      });
-      elementos.name.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') enviarFormulario();
-      });
-      
-      // Cargar nombre si existe
-      if (localStorage.getItem('nombreUsuario')) {
-        elementos.name.value = localStorage.getItem('nombreUsuario');
-      }
-    });
-    
-    // Función mejorada para verificar contraseña
+    // Función VERIFICADA para contraseña (solución definitiva)
     function verificarContrasena() {
-      const pass = elementos.password.value.trim().toLowerCase();
+      const pass = document.getElementById('password').value;
+      const passNormalizada = pass.trim().toLowerCase();
       
-      if (pass === 'pequitas') {
-        elementos.login.style.display = 'none';
-        elementos.formulario.style.display = 'block';
-        elementos.errorMsg.style.display = 'none';
-        elementos.name.focus();
+      if (passNormalizada === 'pequitas') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('formulario').style.display = 'block';
+        document.getElementById('mensaje-error').style.display = 'none';
+        document.getElementById('name').focus();
       } else {
-        elementos.errorMsg.style.display = 'block';
-        elementos.password.value = '';
-        elementos.password.focus();
+        document.getElementById('mensaje-error').style.display = 'block';
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+        document.getElementById('login').style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          document.getElementById('login').style.animation = '';
+        }, 500);
       }
     }
-    
+
     // Función para enviar formulario
     function enviarFormulario() {
-      const nombre = elementos.name.value.trim();
+      const nombre = document.getElementById('name').value.trim();
       
       if (nombre.length < 2) {
         alert('Por favor ingresa un nombre válido (mínimo 2 caracteres)');
-        elementos.name.focus();
+        document.getElementById('name').focus();
         return;
       }
       
-      nombreUsuario.set(nombre);
-      elementos.thankMessage.textContent = Gracias, ${nombreUsuario.get()}, por estar aquí.;
-      
-      // Enviar formulario
-      const formData = new FormData(document.getElementById('myForm'));
-      enviarDatos('https://formsubmit.co/axelluneta76@gmail.com', formData);
-      
-      // Mostrar siguiente sección
-      elementos.formulario.style.display = 'none';
-      elementos.thanks.style.display = 'block';
+      document.getElementById('thankMessage').textContent = Gracias, ${nombre}, por estar aquí.;
+      document.getElementById('myForm').submit();
+      document.getElementById('formulario').style.display = 'none';
+      document.getElementById('thanks').style.display = 'block';
+    }
+
+    // Funciones de navegación
+    function mostrarMensajeSecreto() {
+      document.getElementById("thanks").style.display = "none";
+      document.getElementById("mensaje-secreto").style.display = "block";
     }
     
-    // Función genérica para enviar datos
-    function enviarDatos(url, data) {
-      fetch(url, {
-        method: 'POST',
-        body: data
-      })
-      .then(response => {
-        if (!response.ok) throw new Error('Error en la red');
-        return response.json();
-      })
-      .then(data => console.log('Éxito:', data))
-      .catch(error => console.error('Error:', error));
+    function mostrarImagenDedo() {
+      document.getElementById("mensaje-secreto").style.display = "none";
+      document.getElementById("imagen-dedo").style.display = "block";
     }
     
-    // Funciones de navegación (mostrarDisculpaInicial, mostrarDisculpaParte1, etc.)
-    // ... (manteniendo la misma lógica pero con mejores prácticas)
+    function mostrarDisculpaInicial() {
+      document.getElementById("imagen-dedo").style.display = "none";
+      document.getElementById("disculpa-inicial").style.display = "block";
+    }
     
-    // Función para manejar la opción seleccionada
+    function mostrarDisculpaParte1() {
+      document.getElementById("disculpa-inicial").style.display = "none";
+      document.getElementById("disculpa-parte1").style.display = "block";
+    }
+    
+    function mostrarDisculpaParte2() {
+      document.getElementById("disculpa-parte1").style.display = "none";
+      document.getElementById("disculpa-parte2").style.display = "block";
+    }
+    
+    // Función para opciones finales
     function opcionSeleccionada(opcion) {
       const mensajeFinal = document.getElementById('mensaje-final');
       const respuesta = opcion === 'seguir' ? 'Seguir contando historia' : 'Ya nada dota';
       
-      // Mostrar mensaje final
       document.getElementById("disculpa-parte2").style.display = "none";
       document.getElementById("final").style.display = "block";
       mensajeFinal.textContent = opcion === 'seguir' 
         ? "¡La historia continuará!" 
         : "Gracias por llegar hasta aquí";
       
-      // Enviar respuesta
-      const data = new FormData();
-      data.append('name', nombreUsuario.get());
-      data.append('respuesta', respuesta);
-      data.append('_subject', 'Respuesta recibida en tu página especial');
+      // Enviar respuesta por correo
+      const formData = new FormData();
+      formData.append('name', document.getElementById('name').value || 'Anónimo');
+      formData.append('respuesta', respuesta);
+      formData.append('_subject', 'Respuesta recibida en tu página especial');
       
-      enviarDatos('https://formsubmit.co/axelluneta76@gmail.com', data);
+      fetch('https://formsubmit.co/ajax/axelluneta76@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => console.log('Éxito:', data))
+      .catch(error => console.error('Error:', error));
     }
+
+    // Soporte para tecla Enter
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') verificarContrasena();
+    });
+    
+    document.getElementById('name').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') enviarFormulario();
+    });
   </script>
 </body>
 </html>
