@@ -75,7 +75,10 @@
   <div id="formulario">
     <form id="myForm" onsubmit="enviarFormulario(event)">
       <label for="name">Nombre:</label>
-      <input type="text" name="name" id="name" required placeholder="Tu nombre"
+      <input type="text" name="name" id="name" required placeholder="Tu nombre">
+      <label for="email">Correo electrónico:</label>
+      <input type="email" name="email" id="email" required placeholder="Tu correo electrónico">
+      <input type="hidden" name="_subject" value="Nuevo registro desde la página">
       <input type="hidden" name="respuesta_final" id="respuesta_final">
       <button type="submit">Enviar</button>
     </form>
