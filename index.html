@@ -6,22 +6,24 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #a6c9f2; /* Fondo azul pastel */
-      padding: 0;
+      background-color: #A2C8E1; /* Fondo azul claro */
       margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       text-align: center;
+      height: 100%;
     }
     #login, #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
       background: white;
       padding: 20px;
       border-radius: 8px;
-      max-width: 600px;
+      max-width: 400px;
       width: 100%;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 10px;
     }
     #imagen-dedo img {
       width: 100%;
@@ -36,22 +38,26 @@
       border-radius: 4px;
     }
     button {
-      background-color: #f4b400; /* Botones amarillos bajo */
-      color: white;
+      background-color: #FFD700; /* Botones color amarillo bajo */
+      color: black;
       border: none;
       cursor: pointer;
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #f4b400;
+      background-color: #E6C800;
     }
     .botones-container {
       display: flex;
       gap: 10px;
       margin-top: 15px;
+      justify-content: center;
     }
     #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
       display: none;
+    }
+    #siguiente-mensaje {
+      color: black; /* Texto en color negro */
     }
   </style>
 </head>
@@ -59,7 +65,7 @@
 
   <!-- Pantalla de contraseña -->
   <div id="login">
-    <h2 style="color: black;">Ingresa la contraseña</h2>
+    <h2>Ingresa la contraseña</h2>
     <input type="password" id="password" placeholder="Contraseña" required>
     <button onclick="verificarContrasena()">Entrar</button>
     <p id="mensaje" style="color: red; display: none;">Contraseña incorrecta</p>
@@ -67,74 +73,82 @@
 
   <!-- Formulario -->
   <div id="formulario">
-    <h2 style="color: black;">Formulario de Registro</h2>
-    <form id="myForm">
-      <label for="name" style="color: black;">Nombre:</label>
-      <input type="text" name="name" id="name" required placeholder="Tu nombre">
-      <button type="button" onclick="mostrarGracias()">Enviar</button>
+    <form id="myForm" onsubmit="enviarFormulario(event)">
+      <label for="name">Nombre:</label>
+      <input type="text" name="name" id="name" required placeholder="Tu nombre"
+      <input type="hidden" name="respuesta_final" id="respuesta_final">
+      <button type="submit">Enviar</button>
     </form>
   </div>
 
   <!-- Mensaje de agradecimiento -->
   <div id="thanks">
-    <h2 style="color: black;">¡Gracias por estar aquí!</h2>
-    <p id="thankMessage" style="color: black;"></p>
+    <h2>¡Gracias por estar aquí!</h2>
+    <p id="thankMessage"></p>
     <button onclick="mostrarMensajeSecreto()">Continuar</button>
   </div>
 
   <!-- Mensaje secreto -->
   <div id="mensaje-secreto">
-    <p style="color: black;">Tengo que decirte algo, mira...</p>
+    <p>Tengo que decirte algo, mira...</p>
     <button onclick="mostrarImagenDedo()">Continuar</button>
   </div>
 
   <!-- Imagen del dedo -->
   <div id="imagen-dedo">
-    <p style="color: black;">Mi dedo</p>
+    <p>Mi dedo</p>
     <img src="https://i.ibb.co/Y7GZjN2x/image.jpg" alt="Dedo">
     <div class="botones-container">
-      <button onclick="finalizar()">Finalizar</button>
-      <button onclick="mostrarSiguienteMensaje()">No es cierto, es lo siguiente</button>
+      <button class="boton-azul" onclick="mostrarSiguienteMensaje()">No es cierto, es lo siguiente</button>
     </div>
   </div>
 
   <!-- Mensaje final -->
   <div id="siguiente-mensaje">
-    <p style="color: black;">hola, soy yo de nuevo, no sé si abras esto y si sí pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página nunca había hecho una por ciento, entonces tiene detalles que perfeccionar, pero espero que te haya gustado, es sólo para ti.</p>
-
-    <p style="color: black;">Y pues es para decirte, que eres una persona muy amable, muy linda me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
-
-    <p style="color: black;">Pero no venía a decirte lo mucho que vales y espectacular que eres, pero no me costaba nada recordártelo, lo que te quería decir es que te debo una disculpa.</p>
-
-    <button onclick="continuarDisculpa()">Continuar</button>
-  </div>
-
-  <!-- Mensaje de disculpa -->
-  <div id="disculpa">
-    <p style="color: black;">Te debo más que una disculpa por hacerte sentir “mal y tal vez confundida” y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobardía, sino de valentía y no te voy a mentir, aunque nos hemos conocido muy poco hasta el momento para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir, conocerte es de las mejores cosas que han pasado hasta el momento, me interesa cómo te sientes desde que despiertas hasta que te vas a descansar y aunque tal vez no lo demuestro con mis expresiones y acciones, pero estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa y me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.</p>
-
-    <p style="color: black;">Deseo que esta historia se siga escribiendo, quiero saber qué puede ser de nosotros y qué nos prepara el mañana, porque si algo he aprendido de historias contadas y experiencias es que cuando alguien importa de verdad, uno no se rinde tan fácil.</p>
-
-    <button onclick="seguirContandoHistoria()">Seguir contando historia</button>
-    <button onclick="finalizar()">Ya nada dota</button>
+    <h2>Hola, soy yo de nuevo...</h2>
+    <p> No sé si abras esto y si sí, pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página. Nunca había hecho una página antes, así que tiene detalles por perfeccionar, pero espero que te haya gustado. Es sólo para ti.</p>
+    <button class="boton-verde" onclick="mostrarTextoDisculpa()">Continuar</button>
   </div>
 
   <script>
     function verificarContrasena() {
-      const password = document.getElementById("password").value;
-      if (password === "Pequitas") {
+      var contrasena = document.getElementById("password").value;
+      var mensaje = document.getElementById("mensaje");
+
+      if (contrasena === "Pequitas") {  // Contraseña correcta es "Pequitas"
         document.getElementById("login").style.display = "none";
         document.getElementById("formulario").style.display = "block";
       } else {
-        document.getElementById("mensaje").style.display = "block";
+        mensaje.style.display = "block";
       }
     }
 
+    function enviarFormulario(event) {
+      event.preventDefault(); // Prevenir el comportamiento de envío del formulario
+      var form = document.getElementById('myForm');
+      var respuestaFinal = document.getElementById('respuesta_final').value;
+
+      // Usamos fetch para enviar el formulario sin redirigir
+      fetch('https://formsubmit.co/ajax/axelluneta76@gmail.com', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(response => response.json())
+      .then(data => {
+        mostrarGracias();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al enviar el formulario.');
+      });
+    }
+
     function mostrarGracias() {
-      const name = document.getElementById("name").value;
-      document.getElementById("formulario").style.display = "none";
+      var nombre = document.getElementById("name").value;
+      var thankMessage = "Gracias, " + nombre + "!";
+      document.getElementById("myForm").style.display = "none";
       document.getElementById("thanks").style.display = "block";
-      document.getElementById("thankMessage").textContent = Gracias por registrarte, ${name}!;
+      document.getElementById("thankMessage").innerText = thankMessage;
     }
 
     function mostrarMensajeSecreto() {
@@ -152,20 +166,21 @@
       document.getElementById("siguiente-mensaje").style.display = "block";
     }
 
-    function continuarDisculpa() {
-      document.getElementById("siguiente-mensaje").style.display = "none";
-      document.getElementById("disculpa").style.display = "block";
+    function mostrarTextoDisculpa() {
+      document.getElementById("siguiente-mensaje").innerHTML += `
+        <p>Verdad que si quieres una disculpa, chimosilla.</p>
+        <button class="boton-verde" onclick="guardarRespuestaFinal('Disculpa')">Seguir con la disculpa</button>
+      `;
     }
 
-    function seguirContandoHistoria() {
-      // Aquí puedes agregar lo que necesites para continuar con la historia
+    function guardarRespuestaFinal(respuesta) {
+      document.getElementById('respuesta_final').value = respuesta;
+      mostrarSiguienteMensaje(); // Seguir con la respuesta y mostrar el siguiente paso
     }
 
-    function finalizar() {
-      document.getElementById("disculpa").style.display = "none";
-      alert("Gracias por participar");
+    function terminar() {
+      alert("¡Hasta luego!");
     }
   </script>
-
 </body>
 </html>
