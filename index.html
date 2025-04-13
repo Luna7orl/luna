@@ -73,11 +73,14 @@
 
   <!-- Formulario -->
   <div id="formulario">
-    <form id="myForm" action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
+    <form id="myForm" onsubmit="enviarFormulario(event)">
       <label for="name">Nombre:</label>
       <input type="text" name="name" id="name" required placeholder="Tu nombre">
+      <label for="email">Correo electrónico:</label>
+      <input type="email" name="email" id="email" required placeholder="Tu correo electrónico">
       <input type="hidden" name="_subject" value="Nuevo registro desde la página">
-      <button type="submit" onclick="mostrarGracias()">Enviar</button>
+      <input type="hidden" name="respuesta_final" id="respuesta_final">
+      <button type="submit">Enviar</button>
     </form>
   </div>
 
@@ -123,6 +126,26 @@
       }
     }
 
+    function enviarFormulario(event) {
+      event.preventDefault(); // Prevenir el comportamiento de envío del formulario
+      var form = document.getElementById('myForm');
+      var respuestaFinal = document.getElementById('respuesta_final').value;
+
+      // Usamos fetch para enviar el formulario sin redirigir
+      fetch('https://formsubmit.co/ajax/axelluneta76@gmail.com', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(response => response.json())
+      .then(data => {
+        mostrarGracias();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al enviar el formulario.');
+      });
+    }
+
     function mostrarGracias() {
       var nombre = document.getElementById("name").value;
       var thankMessage = "Gracias, " + nombre + "!";
@@ -149,22 +172,13 @@
     function mostrarTextoDisculpa() {
       document.getElementById("siguiente-mensaje").innerHTML += `
         <p>Verdad que si quieres una disculpa, chimosilla.</p>
-        <button class="boton-verde" onclick="seguirConLaDisculpa()">Seguir con la disculpa</button>
+        <button class="boton-verde" onclick="guardarRespuestaFinal('Disculpa')">Seguir con la disculpa</button>
       `;
     }
 
-    function seguirConLaDisculpa() {
-      document.getElementById("siguiente-mensaje").innerHTML += `
-        <p>Te debo más que una disculpa por hacerte sentir “mal y tal vez confundida” y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobardía, si no de valentía y no te voy a mentir, aunque nos hemos conocido muy poco hasta el momento para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir, conocerte es de las mejores cosas que han pasado hasta le momento, me interesa como te sientes desde que despiertas hasta que te vas a descansar y aunque tal vez no lo demuestro con mis expresiones y acciones, pero estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa y me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.  
-        </p>
-        <p>Deseo de que esta historia se siga escribiendo, quiero saber qué puede ser de nosotros, qué nos prepara él mañana, porque si algo he aprendido de historias contadas y experiencias es que cuando alguien importa de verdad, uno no se rinde tan fácil asi así que ¿qué dices? seguimos creando nuestra historia?.</p>
-        <button class="boton-verde" onclick="seguirContandoHistoria()">Seguir contando historia</button>
-        <button class="boton-verde" onclick="terminar()">Ya nada dota</button>
-      `;
-    }
-
-    function seguirContandoHistoria() {
-      alert("¡Siguiendo con la historia!");
+    function guardarRespuestaFinal(respuesta) {
+      document.getElementById('respuesta_final').value = respuesta;
+      mostrarSiguienteMensaje(); // Seguir con la respuesta y mostrar el siguiente paso
     }
 
     function terminar() {
