@@ -60,14 +60,10 @@
       display: none;
     }
     #siguiente-mensaje {
-      background-color: #a3c4f3;
-      color: #f1d02d;
+      background-color: #A2C8E1;
+      color: #FFD700;
       padding: 20px;
       border-radius: 8px;
-    }
-    #siguiente-mensaje button {
-      background-color: #f1d02d;
-      color: black;
     }
   </style>
 </head>
@@ -117,40 +113,76 @@
   <!-- Mensaje final -->
   <div id="siguiente-mensaje">
     <h2>Hola, soy yo de nuevo...</h2>
-    <p>Hola, soy yo de nuevo, no sé si abras esto y si sí pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página nunca había hecho una por ciento, entonces tiene detalles que perfeccionar, pero espero que te haya gustado, es sólo para ti.</p>
-    <p>Y pues es para decirte, que eres una persona muy amable, muy linda me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
-    <p>Pero no venía a decirte lo mucho que vales y espectacular que eres pero no me costaba nada recordártelo, lo que te quería decir es que te debo una disculpa.</p>
+    <p> No sé si abras esto y si sí, pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página. Nunca había hecho una página antes, así que tiene detalles por perfeccionar, pero espero que te haya gustado. Es sólo para ti.</p>
+    <p>Y pues es para decirte que eres una persona muy amable, muy linda, me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
+    <p>Pero no venía a decirte lo mucho que vales y lo espectacular que eres, pero no me costaba nada recordártelo. Lo que te quería decir es que te debo una disculpa...</p>
 
-    <!-- Botones para continuar -->
-    <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Respuesta a la disculpa">
-      <input type="hidden" name="_next" value="gracias.html">
-      <button type="submit" name="respuesta" value="continuar">Continuar</button>
-    </form>
-    <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Respuesta a la disculpa">
-      <input type="hidden" name="_next" value="gracias.html">
-      <button type="submit" name="respuesta" value="seguir con la disculpa">Seguir con la disculpa</button>
-    </form>
-
-    <p>Después de esto:</p>
-    <p>Te debo más que una disculpa por hacerte sentir mal y tal vez confundida, no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobardía, sino de valentía.</p>
-    <p>No te voy a mentir, aunque nos hemos conocido muy poco hasta el momento, para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir. Conocerte es de las mejores cosas que han pasado hasta el momento. Me interesa cómo te sientes desde que despiertas hasta que te vas a descansar, y aunque tal vez no lo demuestro con mis expresiones y acciones, estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa. Me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.</p>
-    <p>Deseo que esta historia se siga escribiendo. Quiero saber qué puede ser de nosotros, qué nos prepara el mañana.</p>
-    <p>Porque si algo he aprendido de historias contadas y experiencias, es que cuando alguien importa de verdad, uno no se rinde tan fácil.</p>
-
-    <!-- Botones finales -->
-    <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Continuación de la historia">
-      <input type="hidden" name="_next" value="gracias.html">
-      <button type="submit" name="respuesta" value="seguir contando historia">Seguir contando historia</button>
-    </form>
-    <form action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Interrupción de la historia">
-      <input type="hidden" name="_next" value="gracias.html">
-      <button type="submit" name="respuesta" value="ya nada dota">Ya nada dota</button>
-    </form>
+    <button class="boton-verde" onclick="mostrarTextoDisculpa()">Continuar</button>
   </div>
 
+  <script>
+    function verificarContrasena() {
+      var contrasena = document.getElementById("password").value;
+      var mensaje = document.getElementById("mensaje");
+
+      if (contrasena === "Pequitas") {  // Contraseña correcta es "Pequitas"
+        document.getElementById("login").style.display = "none";
+        document.getElementById("formulario").style.display = "block";
+      } else {
+        mensaje.style.display = "block";
+      }
+    }
+
+    function mostrarGracias() {
+      var nombre = document.getElementById("name").value;
+      var thankMessage = "Gracias, " + nombre + "!";
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("thanks").style.display = "block";
+      document.getElementById("thankMessage").innerText = thankMessage;
+    }
+
+    function mostrarMensajeSecreto() {
+      document.getElementById("thanks").style.display = "none";
+      document.getElementById("mensaje-secreto").style.display = "block";
+    }
+
+    function mostrarImagenDedo() {
+      document.getElementById("mensaje-secreto").style.display = "none";
+      document.getElementById("imagen-dedo").style.display = "block";
+    }
+
+    function finalizar() {
+      alert("¡Has finalizado el recorrido!");
+    }
+
+    function mostrarSiguienteMensaje() {
+      document.getElementById("imagen-dedo").style.display = "none";
+      document.getElementById("siguiente-mensaje").style.display = "block";
+    }
+
+    function mostrarTextoDisculpa() {
+      document.getElementById("siguiente-mensaje").innerHTML += `
+        <p>Verdad que si quieres una disculpa, chimosilla.</p>
+        <button class="boton-verde" onclick="seguirConLaDisculpa()">Seguir con la disculpa</button>
+      `;
+    }
+
+    function seguirConLaDisculpa() {
+      document.getElementById("siguiente-mensaje").innerHTML += `
+        <p>Te debo más que una disculpa por hacerte sentir “mal y tal vez confundida”...</p>
+        <p>Y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona. No son de cobardía, sino de valentía...</p>
+        <button class="boton-verde" onclick="seguirContandoHistoria()">Seguir contando historia</button>
+        <button class="boton-verde" onclick="terminar()">Ya nada dota</button>
+      `;
+    }
+
+    function seguirContandoHistoria() {
+      alert("¡Siguiendo con la historia!");
+    }
+
+    function terminar() {
+      alert("¡Hasta luego!");
+    }
+  </script>
 </body>
 </html>
