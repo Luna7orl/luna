@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #A2C8E1; /* Fondo azul claro */
       padding: 40px;
       display: flex;
       justify-content: center;
@@ -36,20 +36,20 @@
       border-radius: 4px;
     }
     button {
-      background-color: #007BFF;
-      color: white;
+      background-color: #FFD700; /* Botones color amarillo bajo */
+      color: black;
       border: none;
       cursor: pointer;
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #0056b3;
+      background-color: #E6C800;
     }
     .boton-azul {
-      background-color: #007BFF;
+      background-color: #FFD700;
     }
     .boton-verde {
-      background-color: #28a745;
+      background-color: #FFD700;
     }
     .botones-container {
       display: flex;
@@ -60,10 +60,7 @@
       display: none;
     }
     #siguiente-mensaje {
-      background-color: #A2C8E1;
-      color: #FFD700;
-      padding: 20px;
-      border-radius: 8px;
+      color: black; /* Texto en color negro */
     }
   </style>
 </head>
@@ -79,7 +76,6 @@
 
   <!-- Formulario -->
   <div id="formulario">
-    <h2>Formulario de Registro</h2>
     <form id="myForm">
       <label for="name">Nombre:</label>
       <input type="text" name="name" id="name" required placeholder="Tu nombre">
@@ -105,7 +101,6 @@
     <p>Mi dedo</p>
     <img src="https://i.ibb.co/Y7GZjN2x/image.jpg" alt="Dedo">
     <div class="botones-container">
-      <button onclick="finalizar()">Finalizar</button>
       <button class="boton-azul" onclick="mostrarSiguienteMensaje()">No es cierto, es lo siguiente</button>
     </div>
   </div>
@@ -114,9 +109,6 @@
   <div id="siguiente-mensaje">
     <h2>Hola, soy yo de nuevo...</h2>
     <p> No sé si abras esto y si sí, pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página. Nunca había hecho una página antes, así que tiene detalles por perfeccionar, pero espero que te haya gustado. Es sólo para ti.</p>
-    <p>Y pues es para decirte que eres una persona muy amable, muy linda, me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
-    <p>Pero no venía a decirte lo mucho que vales y lo espectacular que eres, pero no me costaba nada recordártelo. Lo que te quería decir es que te debo una disculpa...</p>
-
     <button class="boton-verde" onclick="mostrarTextoDisculpa()">Continuar</button>
   </div>
 
@@ -151,10 +143,6 @@
       document.getElementById("imagen-dedo").style.display = "block";
     }
 
-    function finalizar() {
-      alert("¡Has finalizado el recorrido!");
-    }
-
     function mostrarSiguienteMensaje() {
       document.getElementById("imagen-dedo").style.display = "none";
       document.getElementById("siguiente-mensaje").style.display = "block";
@@ -169,8 +157,9 @@
 
     function seguirConLaDisculpa() {
       document.getElementById("siguiente-mensaje").innerHTML += `
-        <p>Te debo más que una disculpa por hacerte sentir “mal y tal vez confundida”...</p>
-        <p>Y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona. No son de cobardía, sino de valentía...</p>
+        <p>Te debo más que una disculpa por hacerte sentir “mal y tal vez confundida” y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobardía, si no de valentía y no te voy a mentir, aunque nos hemos conocido muy poco hasta el momento para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir, conocerte es de las mejores cosas que han pasado hasta le momento, me interesa como te sientes desde que despiertas hasta que te vas a descansar y aunque tal vez no lo demuestro con mis expresiones y acciones, pero estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa y me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.  
+        </p>
+        <p>Deseo de que esta historia se siga escribiendo, quiero saber qué puede ser de nosotros, qué nos prepara él mañana, porque si algo he aprendido de historias contadas y experiencias es que cuando alguien importa de verdad, uno no se rinde tan fácil.</p>
         <button class="boton-verde" onclick="seguirContandoHistoria()">Seguir contando historia</button>
         <button class="boton-verde" onclick="terminar()">Ya nada dota</button>
       `;
