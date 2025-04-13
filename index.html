@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Acceso Protegido</title>
+  <title>Mensaje Especial</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 40px;
+      font-family: 'Arial', sans-serif;
+      background-color: #B0E0E6; /* Azul pastel */
+      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,48 +15,58 @@
       margin: 0;
       text-align: center;
     }
-    #login, #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 400px;
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
       width: 100%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 20px auto;
+    }
+    h1, h2, h3, p {
+      color: #FFD700; /* Amarillo bajo */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .texto-mensaje {
+      color: #333;
+      line-height: 1.6;
+      text-align: left;
+      margin: 20px 0;
     }
     #imagen-dedo img {
       width: 100%;
-      border-radius: 5px;
-      margin-top: 10px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border: 3px solid #FFD700;
     }
-    input, button {
+    input, textarea, button {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      padding: 12px;
+      margin-top: 15px;
+      border: 2px solid #FFD700;
+      border-radius: 8px;
+      font-size: 16px;
     }
     button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
+      background-color: #FFD700; /* Amarillo bajo */
+      color: #333;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
     }
     button:hover {
-      background-color: #0056b3;
-    }
-    .boton-azul {
-      background-color: #007BFF;
-    }
-    .boton-verde {
-      background-color: #28a745;
+      background-color: #FFC000;
+      transform: translateY(-2px);
     }
     .botones-container {
       display: flex;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 15px;
+      margin-top: 20px;
+      justify-content: center;
     }
-    #formulario, #thanks, #mensaje-secreto, #imagen-dedo, #siguiente-mensaje {
+    #formulario, #thanks, #mensaje-secreto, #imagen-dedo, 
+    #disculpa-inicial, #disculpa-parte1, #disculpa-parte2, #final {
       display: none;
     }
   </style>
@@ -64,7 +74,7 @@
 <body>
 
   <!-- Pantalla de contraseña -->
-  <div id="login">
+  <div id="login" class="container">
     <h2>Ingresa la contraseña</h2>
     <input type="password" id="password" placeholder="Contraseña" required>
     <button onclick="verificarContrasena()">Entrar</button>
@@ -72,45 +82,82 @@
   </div>
 
   <!-- Formulario -->
-  <div id="formulario">
+  <div id="formulario" class="container">
     <h2>Formulario de Registro</h2>
-    <form id="myForm">
+    <form id="myForm" action="https://formsubmit.co/axelluneta76@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Alguien ha entrado a tu página especial">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://luna7orl.github.io/luna/thanks.html">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_captcha" value="false">
+      
       <label for="name">Nombre:</label>
       <input type="text" name="name" id="name" required placeholder="Tu nombre">
-      <button type="button" onclick="mostrarGracias()">Enviar</button>
+      <button type="submit" onclick="guardarNombre()">Enviar</button>
     </form>
   </div>
 
   <!-- Mensaje de agradecimiento -->
-  <div id="thanks">
+  <div id="thanks" class="container">
     <h2>¡Gracias por estar aquí!</h2>
     <p id="thankMessage"></p>
     <button onclick="mostrarMensajeSecreto()">Continuar</button>
   </div>
 
   <!-- Mensaje secreto -->
-  <div id="mensaje-secreto">
+  <div id="mensaje-secreto" class="container">
     <p>Tengo que decirte algo, mira...</p>
     <button onclick="mostrarImagenDedo()">Continuar</button>
   </div>
 
   <!-- Imagen del dedo -->
-  <div id="imagen-dedo">
+  <div id="imagen-dedo" class="container">
     <p>Mi dedo</p>
     <img src="https://i.ibb.co/Y7GZjN2x/image.jpg" alt="Dedo">
+    <button onclick="mostrarDisculpaInicial()">No es cierto, es lo siguiente</button>
+  </div>
+
+  <!-- Disculpa inicial -->
+  <div id="disculpa-inicial" class="container">
+    <div class="texto-mensaje">
+      <p>Hola, soy yo de nuevo, no sé si abras esto y si sí pues una disculpa por lo del dedo jajaja, era necesario que lo pusiera, me tardé un día casi sin parar y con tres horas de dormir por nostalgia, pensamientos y creando esta página nunca había hecho una por ciento, entonces tiene detalles que perfeccionar, pero espero que te haya gustado, es sólo para ti.</p>
+      <p>Y pues es para decirte, que eres una persona muy amable, muy linda me atrevería a decir que la más linda que he conocido, con unas expresiones faciales demasiado bonitas y únicas, especial, única, con corazón de pollo, carismática muuuy carismática jajaja, aparte de coqueta claro y barbara jajaja pero creo que esto ya lo sabes.</p>
+      <p>Pero no venía a decirte lo mucho que vales y espectacular que eres pero no me costaba nada recordártelo, lo que te quería decir es que te debo una disculpa.</p>
+    </div>
+    <button onclick="mostrarDisculpaParte1()">Continuar</button>
+  </div>
+
+  <!-- Disculpa parte 1 -->
+  <div id="disculpa-parte1" class="container">
+    <div class="texto-mensaje">
+      <p>Verdad que si quieres una disculpa, chimosilla.</p>
+    </div>
+    <button onclick="mostrarDisculpaParte2()">Seguir con la disculpa</button>
+  </div>
+
+  <!-- Disculpa parte 2 -->
+  <div id="disculpa-parte2" class="container">
+    <div class="texto-mensaje">
+      <p>Te debo más que una disculpa por hacerte sentir "mal y tal vez confundida" y no sé si ya me la hayas aceptado, pero me voy a seguir disculpando porque aunque para mí no arreglan nada si la otra persona no las acepta, para mí también son un acto de arrepentimiento que tiene mucho valor según una persona, no son de cobardía, si no de valentía y no te voy a mentir, aunque nos hemos conocido muy poco hasta el momento para mí ya eres muy importante en mi vida, me importas más de lo que te he dicho y de lo que te podré decir, conocerte es de las mejores cosas que han pasado hasta el momento, me interesa como te sientes desde que despiertas hasta que te vas a descansar y aunque tal vez no lo demuestro con mis expresiones y acciones, pero estoy feliz al verte, conocerte y dichoso de ver cuando haces eso tan tuyo de fruncir la nariz, cada vez que miro tu sonrisa y me siento afortunado cuando causo en ti una risa, cuando me dejas acompañarte a cualquier lugar.</p>
+      <p>Deseo de que esta historia se siga escribiendo, quiero saber que puede ser de nosotros que nos prepara el mañana, porque si algo he aprendido de historias contadas y experiencias es que cuando alguien importa de verdad, uno no se rinde tan fácil.</p>
+    </div>
     <div class="botones-container">
-      <button onclick="finalizar()">Finalizar</button>
-      <button class="boton-azul" onclick="mostrarSiguienteMensaje()">No es cierto, es lo siguiente</button>
+      <button onclick="opcionSeleccionada('seguir')">Seguir contando historia</button>
+      <button onclick="opcionSeleccionada('nada')">Ya nada dota</button>
     </div>
   </div>
 
-  <!-- Mensaje final -->
-  <div id="siguiente-mensaje">
-    <p id="texto-final">¡Este es el mensaje especial que querías compartir! 💖</p>
-    <button class="boton-verde" onclick="cerrarTodo()">Cerrar</button>
+  <!-- Final -->
+  <div id="final" class="container">
+    <h2 id="mensaje-final"></h2>
+    <button onclick="location.reload()">Volver al inicio</button>
   </div>
 
   <script>
+    // Variable para almacenar el nombre
+    let nombreUsuario = '';
+    
+    // Función para verificar contraseña
     function verificarContrasena() {
       const pass = document.getElementById('password').value;
       if (pass === 'Pequitas') {
@@ -120,40 +167,78 @@
         document.getElementById('mensaje').style.display = 'block';
       }
     }
-
+    
+    // Función para guardar el nombre
+    function guardarNombre() {
+      nombreUsuario = document.getElementById('name').value;
+      document.getElementById('thankMessage').textContent = Gracias, ${nombreUsuario}, por estar aquí.;
+    }
+    
+    // Función para mostrar agradecimiento
     function mostrarGracias() {
-      const name = document.getElementById('name').value;
       document.getElementById('formulario').style.display = 'none';
       document.getElementById('thanks').style.display = 'block';
-      document.getElementById('thankMessage').innerHTML = 'Gracias, ' + name + ', por estar aquí.';
     }
-
+    
+    // Función para mostrar mensaje secreto
     function mostrarMensajeSecreto() {
       document.getElementById("thanks").style.display = "none";
       document.getElementById("mensaje-secreto").style.display = "block";
     }
-
+    
+    // Función para mostrar imagen del dedo
     function mostrarImagenDedo() {
       document.getElementById("mensaje-secreto").style.display = "none";
       document.getElementById("imagen-dedo").style.display = "block";
     }
-
-    function mostrarSiguienteMensaje() {
+    
+    // Función para mostrar disculpa inicial
+    function mostrarDisculpaInicial() {
       document.getElementById("imagen-dedo").style.display = "none";
-      document.getElementById("siguiente-mensaje").style.display = "block";
-      // Personaliza el mensaje final:
-      document.getElementById("texto-final").innerText = "¡Tengo que decirte que... (tu mensaje aquí)!";
+      document.getElementById("disculpa-inicial").style.display = "block";
     }
-
-    function finalizar() {
-      alert("¡Hasta pronto! ❤");
-      // Opción alternativa: window.location.href = "https://...";
+    
+    // Función para mostrar disculpa parte 1
+    function mostrarDisculpaParte1() {
+      document.getElementById("disculpa-inicial").style.display = "none";
+      document.getElementById("disculpa-parte1").style.display = "block";
     }
-
-    function cerrarTodo() {
-      // Recarga la página para reiniciar el flujo:
-      location.reload();
-      // Opción alternativa: window.location.href = "https://...";
+    
+    // Función para mostrar disculpa parte 2
+    function mostrarDisculpaParte2() {
+      document.getElementById("disculpa-parte1").style.display = "none";
+      document.getElementById("disculpa-parte2").style.display = "block";
+    }
+    
+    // Función para manejar la opción seleccionada
+    function opcionSeleccionada(opcion) {
+      document.getElementById("disculpa-parte2").style.display = "none";
+      document.getElementById("final").style.display = "block";
+      
+      if (opcion === 'seguir') {
+        document.getElementById("mensaje-final").textContent = "¡La historia continuará!";
+      } else {
+        document.getElementById("mensaje-final").textContent = "Gracias por llegar hasta aquí";
+      }
+      
+      // Enviar la respuesta por correo
+      enviarRespuesta(opcion);
+    }
+    
+    // Función para enviar la respuesta por correo
+    function enviarRespuesta(opcion) {
+      const formData = new FormData();
+      formData.append('name', nombreUsuario || 'Anónimo');
+      formData.append('respuesta', opcion === 'seguir' ? 'Seguir contando historia' : 'Ya nada dota');
+      formData.append('_subject', 'Respuesta recibida en tu página especial');
+      
+      fetch('https://formsubmit.co/ajax/axelluneta76@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => console.log('Correo enviado:', data))
+      .catch(error => console.error('Error:', error));
     }
   </script>
 </body>
